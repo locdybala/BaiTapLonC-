@@ -1,0 +1,1156 @@
+>>> arcpy.CreateFileGDB_management("E:\decuong","NenDiaLy50N")
+==============================================================
+5.Thủy hệ
+>>> arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","ThuyHe","VN 2000 UTM Zone 48N")
+
+5.1:Bảng "Bien"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","Bien","POLYGON")
+
+>>> arcpy.AddField_management("Bien","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("Bien","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("Bien","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBien"," ","TEXT")
+
+>>> domDict={"LC03":"Bien","LC06":"Vinh,Vung"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBien",code,domDict[code])
+...     arcpy.AssignDomainToField_management("Bien","maDoiTuong","DoiTuongBien")
+
+5.2:Bảng "Dao"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","Dao","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","Dao2","POLYGON")
+
+>>> arcpy.AddField_management("Dao","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao","LoaiTrangThaiXuatLo","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao2","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao2","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dao2","LoaiTrangThaiXuatLo","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTrangThaiXuatLo"," ","TEXT")
+
+>>> domDict={1:"Chim",2:"Noi",3:"Nua chim,Nua noi"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTrangThaiXuatLo",code,domDict[code])
+...     arcpy.AssignDomainToField_management("Dao","LoaiTrangThaiXuatLo","LoaiTrangThaiXuatLo")
+        arcpy.AssignDomainToField_management("Dao2","LoaiTrangThaiXuatLo","LoaiTrangThaiXuatLo")
+
+5.3:Bảng "NguonNuoc"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","NguonNuocP","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","NguonNuocG","POLYGON")
+
+>>> arcpy.AddField_management("NguonNuocP","maDoituong","TEXT","","",50)
+
+>>> arcpy.AddField_management("NguonNuocP","loaiNguonNuoc","TEXT","","",50)
+
+>>> arcpy.AddField_management("NguonNuocP","ten","TEXT","","",50)
+
+>>> arcpy.AddField_management("NguonNuocG","maDoituong","TEXT","","",50)
+
+>>> arcpy.AddField_management("NguonNuocG","loaiNguonNuoc","TEXT","","",50)
+
+>>> arcpy.AddField_management("NguonNuocG","ten","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNguonNuoc"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiNguonNuoc"," ","TEXT")
+
+>>> domDict1={"LA05":"Mach Nuoc","LA03":"Gieng Nuoc"}
+>>> for code in domDict1:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNguonNuoc",code,domDict1[code])
+...     arcpy.AssignDomainToField_management("NguonNuocP","maDoituong","DoiTuongNguonNuoc")
+...     arcpy.AssignDomainToField_management("NguonNuocG","maDoituong","DoiTuongNguonNuoc")
+
+>>> domDict2={1:"Khoang",2:"Nong",3:"Thuong"}
+>>> for code in domDict2:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiNguonNuoc",code,domDict2[code])
+...     arcpy.AssignDomainToField_management("NguonNuocP","loaiNguonNuoc","LoaiNguonNuoc")
+...     arcpy.AssignDomainToField_management("NguonNuocG","loaiNguonNuoc","LoaiNguonNuoc")
+...    
+
+5.4:Bảng "BienDoiDuongChay"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","BienDoiDongChayG","POLYGON")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","BienDoiDongChayP","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","BienDoiDongChayL","POLYLINE")
+
+>>> arcpy.AddField_management("BienDoiDongChayG","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayG","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayG","diaDanh","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayP","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayP","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayP","diaDanh","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayL","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayL","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BienDoiDongChayL","diaDanh","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBienDoDongChay"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBienDoDongChay","LC01","Bai Da Duoi Nuoc")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBienDoDongChay","LD02","Ghenh")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBienDoDongChay","LD03","Thac")
+
+>>> arcpy.AssignDomainToField_management("BienDoiDongChayG","maDoiTuong","DoiTuongBienDoDongChay")
+
+>>> arcpy.AssignDomainToField_management("BienDoiDongChayP","maDoiTuong","DoiTuongBienDoDongChay")
+
+>>> arcpy.AssignDomainToField_management("BienDoiDongChayL","maDoiTuong","DoiTuongBienDoDongChay")
+
+5.5:Bảng "BaiBoi"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","BaiBoi","POLYGON")
+
+>>> arcpy.AddField_management("BaiBoi","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BaiBoi","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BaiBoi","diaDanh","TEXT","","",50)
+
+>>> arcpy.AddField_management("BaiBoi","loaiBaiBoi","TEXT","","",50)
+
+>>> arcpy.AddField_management("BaiBoi","loaiTrangThaiXuatLo","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiBaiBoi"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTrangThaiXuatLo"," ","TEXT")
+
+>>> domDict={-1:"Khong xac dinh",1:"Cat",2:"Bun",3:"Da Soi",4:"Loai Khac"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiBaiBoi",code,domDict[code])
+...     arcpy.AssignDomainToField_management("BaiBoi","loaiBaiBoi","LoaiBaiBoi")
+
+>>> domDict2={1:"Chim",2:"Noi",3:"Nua chim,Nua noi"}
+>>> for code in domDict2:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTrangThaiXuatLo",code,domDict2[code])
+...     arcpy.AssignDomainToField_management("BaiBoi","loaiTrangThaiXuatLo","LoaiTrangThaiXuatLo")
+
+5.6:Bảng "KenhMuong"
+>>> arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","NuocMat","VN 2000 UTM Zone 48N")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\NuocMat","KenhMuong1","POLYLINE")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\NuocMat","KenhMuong2","POLYGON")
+
+>>> arcpy.AddField_management("KenhMuong1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("KenhMuong1","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("KenhMuong1","diaDanh","TEXT","","",50)
+
+>>> arcpy.AddField_management("KenhMuong2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("KenhMuong2","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("KenhMuong2","diaDanh","TEXT","","",50)
+
+
+5.7:Bảng "MatNuocTinh"
+>>> arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","NuocMat","VN 2000 UTM Zone 48N")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\NuocMat","MatNuocTinh","POLYGON")
+
+>>> arcpy.AddField_management("MatNuocTinh","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("MatNuocTinh","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("MatNuocTinh","diaDanh","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNuocMatTinh"," ","TEXT")
+
+>>> domDict={"LB01":"Ao/Ho","LB02":"Dam/Pha","LB03":"Ho Chua"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNuocMatTinh",code,domDict[code])
+...     arcpy.AssignDomainToField_management("MatNuocTinh","maDoiTuong","DoiTuongNuocMatTinh")
+...     arcpy.AssignDomainToField_management("MatNuocTinh","danhTuChung","DoiTuongNuocMatTinh")
+...     arcpy.AssignDomainToField_management("MatNuocTinh","diaDanh","DoiTuongNuocMatTinh")
+
+5.8:Bảng "SongSuoi"
+>>> arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","NuocMat","VN 2000 UTM Zone 48N")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\NuocMat","SongSuoi1","POLYGON")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\NuocMat","SongSuoi2","POLYLINE")
+
+>>> arcpy.AddField_management("SongSuoi1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi1","loaiTrangThaiMatNuoc","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi1","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi1","diaDanh","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi2","loaiTrangThaiMatNuoc","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi2","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("SongSuoi2","diaDanh","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTrangThaiNuocMat"," ","TEXT")
+
+>>> domDict={1:"On Dinh",2:"Khong on dinh",3:"Kho xac dinh"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTrangThaiNuocMat",code,domDict[code])
+...     arcpy.AssignDomainToField_management("SongSuoi1","loaiTrangThaiMatNuoc","LoaiTrangThaiNuocMat")
+...     arcpy.AssignDomainToField_management("SongSuoi2","loaiTrangThaiMatNuoc","LoaiTrangThaiNuocMat")
+... 
+
+5.8:Bảng "RanhGioiNuocMat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb","RanhGioiNuocMat","POLYLINE")
+
+>>> arcpy.AddField_management("RanhGioiNuocMat","loaiRanhGioiNuocMat","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiNuocMat"," ","TEXT")
+
+>>> domDict={1:"Ao,Ho",2:"Bien",3:"Dam pha",4:"Kenh,Muong",5:"Ho Chua",6:"Song suoi"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiNuocMat",code,domDict[code])
+...     arcpy.AssignDomainToField_management("RanhGioiNuocMat","loaiRanhGioiNuocMat","LoaiRanhGioiNuocMat")
+
+5.9:Bảng "DuongBoNuoc"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb","DuongBoNuoc","POLYLINE")
+
+>>> arcpy.AddField_management("DuongBoNuoc","maDoiTuong","TEXT","","",50)
+
+5.10:Bảng "DuongMepNuoc"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb","DuongMepNuoc","POLYLINE")
+
+>>> arcpy.AddField_management("DuongMepNuoc","maDoiTuong","TEXT","","",50)
+
+5.11:Bảng "RanhGioiNuocMat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb","RanhGioiNuocMat","POLYLINE")
+
+>>> arcpy.AddField_management("RanhGioiNuocMatQuyUoc","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("RanhGioiNuocMatQuyUoc","loaiRanhGioiNuocMatQuyUoc","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiNuocMatQuyUoc"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiNuocMatQuyUoc",1,"Phan chia loai nuoc mat")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiNuocMatQuyUoc",2,"Khep vung nuoc mat")
+
+>>> arcpy.AssignDomainToField_management("RanhGioiNuocMatQuyUoc","loaiRanhGioiNuocMatQuyUoc","LoaiRanhGioiNuocMatQuyUoc")
+
+5.12:Bảng "De"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","De1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","De2","POLYLINE")
+
+>>> arcpy.AddField_management("De1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("De1","danTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("De1","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("De1","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("De1","loaiDe","TEXT","","",50)
+
+>>> arcpy.AddField_management("De1","dungLamGiaoThong","TEXT","","",50)
+
+>>> arcpy.AddField_management("De2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("De2","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("De2","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("De2","loaiDe","TEXT","","",50)
+
+>>> arcpy.AddField_management("De2","dungLamGiaoThong","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDe"," ","TEXT")
+
+>>> domDict={1:"Bao",2:"Bien",3:"Boi",4:"Chuyen dung",5:"Song"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDe",code,domDict[code])
+...     arcpy.AssignDomainToField_management("De1","loaiDe","LoaiDe")
+...     arcpy.AssignDomainToField_management("De2","loaiDe","LoaiDe")
+
+5.13:Bảng "Dap"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","Dap1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","Dap2","POLYLINE")
+
+>>> arcpy.AddField_management("Dap1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap1","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap1","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap1","loaiDap","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap1","dungLamGiaoThong","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap2","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap2","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap2","loaiDap","TEXT","","",50)
+
+>>> arcpy.AddField_management("Dap2","dungLamGiaoThong","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDap"," ","TEXT")
+
+>>> domDict={1:"Chan song",2:"Dang",3:"Tran"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDap",code,domDict[code])
+...     arcpy.AssignDomainToField_management("Dap1","loaiDap","LoaiDap")
+...     arcpy.AssignDomainToField_management("Dap2","loaiDap","LoaiDap")
+
+5.13:Bảng "BoKe"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","BoKe","POLYLINE")
+
+>>> arcpy.AddField_management("BoKe","maDoiTuong","TEXT","","",50)
+
+5.14:Bảng "CongThuyLoi"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","CongThuyLoi1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","CongThuyLoi2","POLYLINE")
+
+>>> arcpy.AddField_management("CongThuyLoi1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongThuyLoi1","ten","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongThuyLoi1","loaiCongThuyLoi","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongThuyLoi2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongThuyLoi2","ten","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongThuyLoi2","loaiCongThuyLoi","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCongThuyLoi"," ","TEXT")
+
+>>> domDict={1:"Co thiet bi",2:"Khong co thieu bi"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCongThuyLoi",code,domDict[code])
+...     arcpy.AssignDomainToField_management("CongThuyLoi1","loaiCongThuyLoi","LoaiCongThuyLoi")
+...     arcpy.AssignDomainToField_management("CongThuyLoi2","loaiCongThuyLoi","LoaiCongThuyLoi")
+
+5.15:Bảng "CongTrinhTrenDe"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","CongTrinhTrenDe1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","CongTrinhTrenDe2","POLYLINE")
+
+>>> arcpy.AddField_management("CongTrinhTrenDe1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongTrinhTrenDe1","ten","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongTrinhTrenDe2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("CongTrinhTrenDe2","ten","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongCongTrinhTrenDe"," ","TEXT")
+
+>>> domDict={"LE06":"Diem canh de","LE02":"Cua khau qua de"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongCongTrinhTrenDe",code,domDict[code])
+...     arcpy.AssignDomainToField_management("CongTrinhTrenDe1","maDoiTuong","DoiTuongCongTrinhTrenDe")
+...     arcpy.AssignDomainToField_management("CongTrinhTrenDe2","maDoiTuong","DoiTuongCongTrinhTrenDe")
+
+5.16:Bảng "TaLuyCongTrinhThuyLoi"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","TaLuyCongTrinhThuyLoi","POLYLINE")
+
+>>> arcpy.AddField_management("TaLuyCongTrinhThuyLoi","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyCongTrinhThuyLoi","loaiTaLy","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyCongTrinhThuyLoi","loaiHinhThaiTaLY","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyCongTrinhThuyLoi","loaiThanhPhanTaLy","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyCongTrinhThuyLoi","tyCaotySau","FLOAT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLuyThuyLoi"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHinhThaiTaLuy"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiThanhPhanTaLuy"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLuyThuyLoi",1,"De")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLuyThuyLoi",2,"Dap")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLuyThuyLoi",3,"Kenh,muong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLuyThuyLoi",4,"Khac")
+
+>>> arcpy.AssignDomainToField_management("TaLuyCongTrinhThuyLoi","loaiTaLy","LoaiTaLuyThuyLoi")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHinhThaiTaLuy",1,"Dap cao")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHinhThaiTaLuy",2,"Xe sau")
+
+>>> arcpy.AssignDomainToField_management("TaLuyCongTrinhThuyLoi","loaiHinhThaiTaLY","LoaiHinhThaiTaLuy")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiThanhPhanTaLuy",1,"Chan ta luy")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiThanhPhanTaLuy",2,"Dinh ta luy")
+
+>>> arcpy.AssignDomainToField_management("TaLuyCongTrinhThuyLoi","loaiThanhPhanTaLy","LoaiThanhPhanTaLuy")
+
+5.17:Bảng "DamLay"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","DamLay","POLYGON")
+
+>>> arcpy.AddField_management("DamLay","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("DamLay","ten","TEXT","","",50)
+
+5.18:Bảng "MangDanNuoc"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","MangDanNuoc","POLYGON")
+
+>>> arcpy.AddField_management("MangDanNuoc","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("MangDanNuoc","loaiMangDanNuoc","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiMangDanNuoc"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiMangDanNuoc",1,"Mat dat")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiMangDanNuoc",2,"Noi")
+
+>>> arcpy.AssignDomainToField_management("MangDanNuoc","loaiMangDanNuoc","LoaiMangDanNuoc")
+
+5.19:Bảng "TramBom"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\ThuyHe","TramBom","POINT")
+
+>>> arcpy.AddField_management("TramBom","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("TramBom","ten","TEXT","","",50)
+
+=====================================================================================================================
+6.Giao thông
+arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","GiaoThong","VN 2000 UTM Zone 48N")
+
+6.1:Bảng "DuongNoiBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","DuongNoiBo1","POLYGON")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","DuongNoiBo2","POLYLINE")
+
+>>> arcpy.AddField_management("DuongNoiBo1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("DuongNoiBo1","loaiChatLieuTraiMat","TEXT","","",50)
+
+>>> arcpy.AddField_management("DuongNoiBo2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("DuongNoiBo2","loaiChatLieuTraiMat","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChatLieuTraiMat"," ","TEXT")
+
+>>> domDict={-1:"Khong xac dinh",1:"Be tong",2:"Gach",3:"Da soi",4:"Dat",5:"Nhua",6:"Khac"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChatLieuTraiMat",code,domDict[code])
+...     arcpy.AssignDomainToField_management("DuongNoiBo1","loaiChatLieuTraiMat","LoaiChatLieuTraiMat")
+...     arcpy.AssignDomainToField_management("DuongNoiBo2","loaiChatLieuTraiMat","LoaiChatLieuTraiMat")
+
+6.2: Bảng "BenBai"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","BenBai1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","BenBai2","POLYGON")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","BenBai3","POLYLINE")
+
+>>> arcpy.AddField_management("BenBai1","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai1","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai1","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai2","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai2","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai2","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai3","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai3","danhTuChung","TEXT","","",50)
+
+>>> arcpy.AddField_management("BenBai3","danhTuRieng","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HA02","Ben oto")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HA03","Ben pha")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HC01","Au thuyen")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HC02","Ben thuy noi dia")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HC03","Cang bien")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HC04","Cang thuy noi dia")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HC07","Cau cang")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HD01","Cang hang khong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBenBai","HD04","Duong bang")
+
+>>> arcpy.AssignDomainToField_management("BenBai1","maDoiTuong","DoiTuongBenBai")
+
+>>> arcpy.AssignDomainToField_management("BenBai2","maDoiTuong","DoiTuongBenBai")
+
+>>> arcpy.AssignDomainToField_management("BenBai3","maDoiTuong","DoiTuongBenBai")
+
+6.3: Bảng "DuongCapTreo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","DuongCapTreo","POLYLINE")
+
+>>> arcpy.AddField_management("DuongCapTreo","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("DuongCapTreo","ten","TEXT","","",50)
+
+6.3: Bảng "BaoHieuGiaoThong"
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","BaoHieuGiaoThong","POINT")
+
+>>> arcpy.AddField_management("BaoHieuGiaoThong","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("BaoHieuGiaoThong","ten","TEXT","","",50)
+
+>>> arcpy.AddField_management("BaoHieuGiaoThong","loaiBaoHieuGiaoThong","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBaoHieuGiaoThong"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiBaoHieuGiaoThong"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongBaoHieuGiaoThong","HG07","Den bien")
+
+>>> arcpy.AssignDomainToField_management("BaoHieuGiaoThong","maDoiTuong","DoiTuongBaoHieuGiaoThong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiBaoHieuGiaoThong",3,"Duong Thuy Noi Dia")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiBaoHieuGiaoThong",4,"Duong bien")
+
+>>> arcpy.AssignDomainToField_management("BaoHieuGiaoThong","loaiBaoHieuGiaoThong","LoaiBaoHieuGiaoThong")
+
+6.3: Bảng "TaLuyGiaoThong"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","TaLuyGiaoThong","POLYLINE")
+
+>>> arcpy.AddField_management("TaLuyGiaoThong","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyGiaoThong","loaiTaLuy","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyGiaoThong","loaiHinhThaiTaLuy","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyGiaoThong","loaiThanhPhanTaLuy","TEXT","","",50)
+
+>>> arcpy.AddField_management("TaLuyGiaoThong","tyCaotySau","FLOAT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLyGiaoThong"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHinhThaiTaLuy"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiThanhPhanTaLuy"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLyGiaoThong",1,"Duong bo")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTaLyGiaoThong",2,"Duong sat")
+
+>>> arcpy.AssignDomainToField_management("TaLuyGiaoThong","loaiTaLuy","LoaiTaLyGiaoThong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHinhThaiTaLuy",1,"Dap cao")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHinhThaiTaLuy",2,"Xe sau")
+
+>>> arcpy.AssignDomainToField_management("TaLuyGiaoThong","loaiHinhThaiTaLuy","LoaiHinhThaiTaLuy")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiThanhPhanTaLuy",1,"Chan ta luy")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiThanhPhanTaLuy",2,"Dinh ta luy")
+
+>>> arcpy.AssignDomainToField_management("TaLuyGiaoThong","loaiThanhPhanTaLuy","LoaiThanhPhanTaLuy")
+
+6.4:Bảng "MatDuongBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","MatDuongBo","POLYGON")
+
+>>> arcpy.AddField_management("MatDuongBo","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA04","Dai phan cach")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA05","Dao giao thong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA09","Nen Duong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA22","Phan duong giao nhau")
+
+>>> arcpy.AssignDomainToField_management("MatDuongBo","maDoiTuong","DoiTuongMatDuongBo")
+
+6.5:Bảng "RanhGioiDuongBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","RanhGioiDuongBo","POLYLINE")
+
+>>> arcpy.AddField_management("RanhGioiDuongBo","maDoiTuong","TEXT","","",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongRanhgioiDuongBo"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongRanhgioiDuongBo","HA08","Mep duong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongRanhgioiDuongBo","HA15","Vai duong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongRanhgioiDuongBo","HA21","Khep nhanh duong")
+
+>>> arcpy.AssignDomainToField_management("RanhGioiDuongBo","maDoiTuong","DoiTuongRanhgioiDuongBo")
+
+6.6:Bảng "HamDiBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","HamDiBo","POINT")
+
+>>> arcpy.AddField_management("HamDiBo","maDoiTuong","TEXT",50)
+
+6.7:Bảng "CongGiaoThong"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","CongGiaoThong","POLYLINE")
+
+>>> arcpy.AddField_management("CongGiaoThong","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("CongGiaoThong","ten","TEXT",50)
+
+>>> arcpy.AddField_management("CongGiaoThong","loaiCongGiaoThong","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCongGiaoThong"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCongGiaoThong",1,"Cong duong bo")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCongGiaoThong",2,"Cong duong sat")
+
+>>> arcpy.AssignDomainToField_management("CongGiaoThong","loaiCongGiaoThong","LoaiCongGiaoThong")
+
+6.8:Bảng "CauDiBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","CauDiBo","POLYLINE")
+
+>>> arcpy.AddField_management("CauDiBo","maDoiTuong","TEXT",50)
+
+6.9:Bảng "HamGiaoThong"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","HamGiaoThong1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","HamGiaoThong2","POLYLINE")
+
+>>> arcpy.AddField_management("HamGiaoThong1","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","danhTuChung","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","danhTuRieng","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","loaiHamDiBo","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","loaiHamGiaoThong","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","chieuDai","FLOAT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","chieuCao","FLOAT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong1","chieuRong","FLOAT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","danhTuChung","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","danhTuRieng","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","loaiHamGiaoThong","TEXT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","chieuDai","FLOAT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","chieuCao","FLOAT",50)
+
+>>> arcpy.AddField_management("HamGiaoThong2","chieuRong","FLOAT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHamGiaoThong"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHamGiaoThong",1,"Duong bo")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHamGiaoThong",2,"Duong sat")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHamGiaoThong",3,"Duong song")
+
+>>> arcpy.AssignDomainToField_management("HamGiaoThong1","loaiHamGiaoThong","LoaiHamGiaoThong")
+
+>>> arcpy.AssignDomainToField_management("HamGiaoThong2","loaiHamGiaoThong","LoaiHamGiaoThong")
+
+6.10:Bảng "DoanVuotSong"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","DoanVuotSong","POLYLINE")
+
+>>> arcpy.AddField_management("DoanVuotSong","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("DoanVuotSong","ten","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongDoanVuotSong"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongDoanVuotSong","HA16","Do")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongDoanVuotSong","HA18","Ngam")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongDoanVuotSong","HA19","Pha")
+
+>>> arcpy.AssignDomainToField_management("DoanVuotSong","maDoiTuong","DoiTuongDoanVuotSong")
+
+6.11:Bảng "DoanTimDuongBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","DoanTimDuongBo","POLYLINE")
+
+>>> arcpy.AddField_management("DoanTimDuongBo","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","loaiDuongBo","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","loaiChatLieuTraiMat","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","loaiHienTrangSuDung","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","loaiKetCau","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","doRong","FLOAT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","ten","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","tenTuyen1","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","tenTuyen2","TEXT",50)
+
+>>> arcpy.AddField_management("DoanTimDuongBo","tenTuyen3","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDuongBo"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChatLieuTraiMat"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangSuDung"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau"," ","TEXT")
+
+>>> domDict={-1:"Khong xac dinh",1:"Be tong",2:"Gach",3:"Da soi",4:"Dat",5:"Nhua",6:"Khac"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChatLieuTraiMat",code,domDict[code])
+...     arcpy.AssignDomainToField_management("DoanTimDuongBo","loaiChatLieuTraiMat","LoaiChatLieuTraiMat")
+
+>>> domDict2={1:"Cao toc",3:"Dan",4:"Giao thong nong thon",5:"Pho",6:"Lang,ngo pho",7:"Chinh",8:"Gom"}
+>>> for code in domDict2:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDuongBo",code,domDict2[code])
+...     arcpy.AssignDomainToField_management("DoanTimDuongBo","loaiDuongBo","LoaiDuongBo")
+...     
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",1,"Qua cau kien co")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",2,"Qua cau tam")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",2,"Qua ham")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",3,"Qua ham")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",4,"Qua dap")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",5,"Tren de")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",6,"Qua ngam")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",7,"Qua ben loi")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCau",8,"Co ket cau khac")
+
+>>> arcpy.AssignDomainToField_management("DoanTimDuongBo","loaiKetCau","LoaiKetCau")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangSuDung",1,"Dang su dung")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangSuDung",2,"Dang xay ding")
+
+>>> arcpy.AssignDomainToField_management("DoanTimDuongBo","loaiHienTrangSuDung","LoaiHienTrangSuDung")
+
+6.12:Bảng "CauGiaoThong"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","CauGiaoThong1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","CauGiaoThong2","POLYLINE")
+
+>>> arcpy.AddField_management("CauGiaoThong1","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","danhTuChung","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","danhTuChung","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","danhTuRieng","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","danhTuRieng","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","loaiCauGiaoThong","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","loaiCauGiaoThong","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","loaiChucNangCau","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","loaiChucNangCau","TEXT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","taiTrong","FLOAT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","taiTrong","FLOAT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","chieuRong","FLOAT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","chieuRong","FLOAT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong2","chieuDai","FLOAT",50)
+
+>>> arcpy.AddField_management("CauGiaoThong1","chieuDai","FLOAT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCauGiaoThong"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChucNangCau"," ","TEXT")
+
+>>> domDict={1:"Cau thuong",2:"Phao",3:"Treo",4:"Tang",5:"Quay",6:"Khac"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiCauGiaoThong",code,domDict[code])
+...     arcpy.AssignDomainToField_management("CauGiaoThong1","loaiCauGiaoThong","LoaiCauGiaoThong")
+...     arcpy.AssignDomainToField_management("CauGiaoThong2","loaiCauGiaoThong","LoaiCauGiaoThong")
+...     
+>>> domDict1={1:"Chung",2:"Duong bo",3:"Duong sat",4:"Vuot"}
+>>> for code in domDict1:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChucNangCau",code,domDict1[code])
+...     arcpy.AssignDomainToField_management("CauGiaoThong1","loaiChucNangCau","LoaiChucNangCau")
+...     arcpy.AssignDomainToField_management("CauGiaoThong2","loaiChucNangCau","LoaiChucNangCau")
+
+6.13:Bảng "CauGiaoThong"   
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","MatDuongBo","POLYGON")
+
+>>> arcpy.AddField_management("MatDuongBo","maDoiTuong","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA04","Dai phan cach")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA05","Dao giao thong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA09","Nen Duong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongMatDuongBo","HA22","Phan duong giao nhau")
+
+>>> arcpy.AssignDomainToField_management("MatDuongBo","maDoiTuong","DoiTuongMatDuongBo")
+
+6.14:Bảng "NutMangDuongBo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","MatDuongBo","POLYGON")	
+
+>>> arcpy.AddField_management("NutMangDuongBo","maDoiTuong","TEXT",50) 
+
+6.15:Bảng "Deo"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","Deo","POINT")
+
+>>> arcpy.AddField_management("Deo","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("Deo","danhTuChung","TEXT",50)
+
+>>> arcpy.AddField_management("Deo","danhTuRieng","TEXT",50)
+
+>>> arcpy.AddField_management("Deo","chieuDai","FLOAT",50)
+
+6.16:Bảng "DoanDuongSat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","DoanDuongSat","POLYLINE")
+
+>>> arcpy.AddField_management("DoanDuongSat","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("DoanDuongSat","loaiDuongSat","TEXT",50)
+
+>>> arcpy.AddField_management("DoanDuongSat","loaiChucNangDuongSat","TEXT",50)
+
+>>> arcpy.AddField_management("DoanDuongSat","loaiHienTrangSuDung","TEXT",50)
+
+>>> arcpy.AddField_management("DoanDuongSat","loaiKetCauDuongSat","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDuongSat"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChucNangDuongSat"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangDuongSat"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCauDuongSat"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDuongSat",1,"Don")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDuongSat",2,"Long")
+
+>>> arcpy.AssignDomainToField_management("DoanDuongSat","loaiDuongSat","LoaiDuongSat")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChucNangDuongSat",1,"Chuyen dung")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChucNangDuongSat",2,"Do thi")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiChucNangDuongSat",3,"Quoc gia")
+
+>>> arcpy.AssignDomainToField_management("DoanDuongSat","loaiChucNangDuongSat","LoaiChucNangDuongSat")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangDuongSat",1,"Dang su dung")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangDuongSat",2,"Dang xay dung")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiHienTrangDuongSat",3,"Khong su dung")
+
+>>> arcpy.AssignDomainToField_management("DoanDuongSat","loaiHienTrangSuDung","LoaiHienTrangDuongSat")
+
+>>> domDict={1:"Qua Cau",2:"Tren cao",3:"Qua ham",4:"Co ket cau khac"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKetCauDuongSat",code,domDict[code])
+...     arcpy.AssignDomainToField_management("DoanDuongSat","loaiKetCauDuongSat","LoaiKetCauDuongSat")
+...     
+>>> 
+
+6.17:Bảng "NutDuongSat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\GiaoThong","NutDuongSat","POINT")
+
+>>> arcpy.AddField_management("NutDuongSat","maDoiTuong","TEXT",50)
+
+==========================================================================================================================
+7.Dân cư cơ sở hạ tầng
+arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","DanCuCoSoHaTang","VN 2000 UTM Zone 48N")
+7.1:Bảng "DiemDanCu"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","DiemDanCu","POINT")
+
+>>> arcpy.AddField_management("DiemDanCu","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("DiemDanCu","loaiDanhTuChung","TEXT",50)
+
+>>> arcpy.AddField_management("DiemDanCu","DanhTuRieng","TEXT",50)
+
+>>> arcpy.AddField_management("DiemDanCu","ten","TEXT",50)
+
+>>> arcpy.AddField_management("DiemDanCu","loaiDiemDanCu","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDanhTuChung"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DiaDanhDanCu"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiĐiemDanCu"," ","TEXT")
+
+
+>>> domDict19={48:"Khu do thi",50:"Khu chung cu",113:"Khu pho",114:"Khoi pho",1:"Ap",3:"Ban",10:"Buon",55:"Lang",87:"Thon",115:"Phum",116:"Soc",109:"Xom"}
+>>> for code in domDict19:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDanhTuChung",code,domDict19[code])
+...     arcpy.AssignDomainToField_management("DiemDanCu","loaiDanhTuChung","LoaiDanhTuChung")
+...     
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiĐiemDanCu",1,"Do thi")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiĐiemDanCu",2,"Nong thon")
+
+>>> arcpy.AssignDomainToField_management("DiemDanCu","loaiDiemDanCu","LoaiĐiemDanCu")
+
+7.2:Bảng "TramDien"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","TramDien1","POINT")
+
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","TramDien2","POLYGON")
+
+>>> arcpy.AddField_management("TramDien1","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("TramDien1","ten","TEXT",50)
+
+>>> arcpy.AddField_management("TramDien2","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("TramDien2","ten","TEXT",50)
+
+7.3:Bảng "DuongDayTaiDien"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","DuongDayTaiDien","POLYLINE")
+
+>>> arcpy.AddField_management("DuongDayTaiDien","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("DuongDayTaiDien","dienAp","FLOAT",50)
+
+7.4:Bảng "TramThuPhatSong"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","TramThuPhatSong","POINT")
+
+>>> arcpy.AddField_management("TramThuPhatSong","maDoiTuong","TEXT",50)
+
+7.5:Bảng "TramQuanTrac"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","TramQuanTrac","POINT")
+
+>>> arcpy.AddField_management("TramQuanTrac","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("TramQuanTrac","loaiTramQuanTrac","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTramQuanTrac"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTramQuanTrac",1,"Hai van")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTramQuanTrac",2,"Khi Tuong")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiTramQuanTrac",3,"Thuy van")
+
+>>> arcpy.AssignDomainToField_management("TramQuanTrac","loaiTramQuanTrac","LoaiTramQuanTrac")
+
+7.6:Bảng "ThapBeNuoc"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","ThapNuocBeNuoc","POINT")
+
+>>> arcpy.AddField_management("ThapNuocBeNuoc","maDoiTuong","TEXT",50)
+
+7.7:Bảng "CongTrinhKienTrucDacBiet"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","CongTrinhKienTrucDacBiet","POINT")
+
+>>> arcpy.AddField_management("CongTrinhKienTrucDacBiet","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("CongTrinhKienTrucDacBiet","ten","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongCongTrinhKienTruc"," ","TEXT")
+
+>>> domDict20={"BQ03":"Cong Thanh","BQ05":"Cot co","BQ12":"Thap co","BQ14":"Tuong dai"}
+>>> for code in domDict20:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongCongTrinhKienTruc",code,domDict20[code])
+...     arcpy.AssignDomainToField_management("CongTrinhKienTrucDacBiet","maDoiTuong","DoiTuongCongTrinhKienTruc")
+...     
+
+7.8:Bảng "Nha"
+>>>arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","Nha","POLYGON")
+
+>>>arcpy.AddField_management("Nha","maDoiTuong","TEXT",50)
+
+>>>arcpy.AddField_management("Nha","ten","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNha"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNha","CB02","Nha")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongNha","CB01","Khoi nha")
+
+>>> arcpy.AssignDomainToField_management("Nha","maDoiTuong","DoiTuongNha")
+
+7.9:Bảng "HaTangKinhTe"
+>>>arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","HaTangKinhTeXaHoi","POINT")
+
+>>>arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\DanCuCoSoHaTang","HaTangKinhTeXaHoi2","POLYGON")
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi","maDoiTuong","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi","danhTuChung","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi","danhTuRieng","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi","ten","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi","diaChi","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi2","maDoiTuong","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi2","danhTuChung","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi2","danhTuRieng","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi2","ten","TEXT",50)
+
+>>>arcpy.AddField_management("HaTangKinhTeXaHoi2","diaChi","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","HaTangKinhTeXaHoi"," ","TEXT")
+
+>>> domDict21={"BD02":"Don cong an","BD03":"Trai cai tao","BD04":"Trung tam phong chay chua chay","BE02":"Co quan chuyen mon","BE03":"Co quan hanh chinh nha nuoc","BE04":"Co quan dang ","BE05":"To chuc chinh tri-xa hoi","BE06":"Toa an","BE07":"Vien kiem soat","BE09":"Co quan dai dien nuoc ngoai","BG02":"Truong cao dang","BG03":"Truong dai hoc","BG04":"Truong day nghe","BG08":"Truong trung hoc co so","BG09":"Truong trung hoc pho thong","BG10":"Trung tam giao duc thuong xuyen","BG11":"Truong dan toc ngoai tru","BH02":"Khu du lich","BH03":"Bai tam","BI02":"Vien nghien cuu,khoa hoc","BI03":"Trung tam thi nghiem,thuc nghiem","BK02":"Doanh trai quan doi","BK03":"Cua khau","BL02":"Khu che xuat","BL03":"Khu cong nghiep","BL04":"Khu khai khoang","BL05":"Kho tang","BL06":"Lam truong","BL07":"Cong ty","BL08":"Nong truong","BL09":"Trang trai","BL11":"Vuon uom","BL12":"Lo nung","BL13":"Ruong muoi","BM02":"Be boi","BM03":"Nha thi dau","BM04":"San gon","BM05":"San van dong","BN02":"Buu dien","BN03":"Cho","BN04":"Khach san","BN05":"Ngan hang","BN06":"Sieu thi","BN07":"Tram xang,dau","BN08":"Trung tam thuong mai","BP02":"Dinh","BP03":"Den","BO03":"Chua","BO04":"Nha tho","BO05":"Co so dao tao ton giao","BQ04":"Cong vien","BQ08":"Nha hat","BQ09":"Nha van hoa","BQ10":"Rap chieu phim","BQ13":"Thu vien","BQ15":"Vuong hoa","BT02":"Bao tang","BR02":"Tram y te","BR04":"Trung tam dieu duong","BR05":"Trung tam y te","BR03":"Benh vien","BS01":"Di tich lich su-van hoa","BS02":"Khu lang mo","BV02":"Nghia trang liet sy","BV03":"Nghia trang","BV04":"Bai thai cong nghiep","BV05":"Bai rac"}
+>>> for code in domDict21:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","HaTangKinhTeXaHoi",code,domDict21[code])
+...     arcpy.AssignDomainToField_management("HaTangKinhTeXaHoi","maDoiTuong","HaTangKinhTeXaHoi")
+...     arcpy.AssignDomainToField_management("HaTangKinhTeXaHoi2","maDoiTuong","HaTangKinhTeXaHoi")
+==========================================================================================================================
+8.Phủ bề mặt
+>>> arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","PhuBeMat","VN 2000 UTM Zone 48N")
+
+8.1:Bảng "RanhGioiPhuBeMat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\PhuBeMat","RanhGioiPhuBeMat","POLYLINE")
+
+>>> arcpy.AddField_management("RanhGioiPhuBeMat","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("RanhGioiPhuBeMat","loaiRanhGioiPhuBeMat","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiPhuBeMat"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiPhuBeMat",1,"Thuc vat")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiPhuBeMat",2,"Khac")
+
+>>> arcpy.AssignDomainToField_management("RanhGioiPhuBeMat","loaiRanhGioiPhuBeMat","LoaiRanhGioiPhuBeMat")
+
+8.2:Bảng "PhuBeMat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\PhuBeMat","PhuBeMat","POLYGON")
+
+>>> arcpy.AddField_management("PhuBeMat","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("PhuBeMat","ten","TEXT",50)
+
+>>> arcpy.AddField_management("PhuBeMat","loaiPhuBeMat","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongPhuBeMat"," ","TEXT")
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiPhuBeMat"," ","TEXT")
+
+>>> domDict={"IA02":"Khu dan cu","IA03":"Khai thac","IA04":"Dat trong","IA05":"Cong trinh","IB02":"Thuc phu nong nghiep","IB03":"Dong co","IB04":"Rung","IB05":"Thuc phu chua thanh rung","IB06":"Khu thuc phu co dan cu","IG01":"Nuoc mat"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","DoiTuongPhuBeMat",code,domDict[code])
+        arcpy.AssignDomainToField_management("PhuBeMat","maDoiTuong","DoiTuongPhuBeMat")
+
+>>> domDict2={1:"Cay lua",2:"Cay luong thuc khac",3:"Cay cong nghiep ngan ngay",5:"Cay cong nghiep khac",6:"Cay bui",7:"Cay hon hop",8:"Cay la kim",9:"Cay la rong",11:"Cay ua mat,chua phen",12:"Cay tre nua",13:"Cay rau",19:"Doi troc",20:"Nui da",21:"cat"}
+>>> for code in domDict2:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiPhuBeMat",code,domDict2[code])
+...     arcpy.AssignDomainToField_management("PhuBeMat","loaiPhuBeMat","LoaiPhuBeMat")
+ ===================================================================================================
+9.Ranh giới
+>>> arcpy.CreateFeatureDataset_management("E:\decuong\NenDiaLy50N.gdb","RanhGioi","VN 2000 UTM Zone 48N")
+
+9.1:Bảng "RanhGioiSuDungDat"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\RanhGioi","RanhGioiSuDungDat","POLYLINE")
+
+>>> arcpy.AddField_management("RanhGioiSuDungDat","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("RanhGioiSuDungDat","loaiDoiTuongNhanDang","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDoiTuongNhanDang"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDoiTuongNhanDang",1,"Thanh luy")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDoiTuongNhanDang",2,"Tuong rao")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiDoiTuongNhanDang",3,"Khac")
+
+>>> arcpy.AssignDomainToField_management("RanhGioiSuDungDat","loaiDoiTuongNhanDang","LoaiDoiTuongNhanDang")
+
+9.2:Bảng "RanhGioiTuongRao"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\RanhGioi","RanhGioiTuongRao","POLYLINE")
+
+>>> arcpy.AddField_management("RanhGioiTuongRao","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("RanhGioiTuongRao","loaiRanhGioiSuDungDat","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiSuDungDat"," ","TEXT")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiSuDungDat",1,"Ranh gioi khu vuc cam")
+
+>>> arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiRanhGioiSuDungDat",2,"Ranh gioi su dung dat")
+
+>>> arcpy.AssignDomainToField_management("RanhGioiTuongRao","loaiRanhGioiSuDungDat","LoaiRanhGioiSuDungDat")
+
+9.3:Bảng "KhuChucNang"
+>>> arcpy.CreateFeatureclass_management("E:\decuong\NenDiaLy50N.gdb\RanhGioi","KhuChucNang","POLYGON")
+
+>>> arcpy.AddField_management("KhuChucNang","maDoiTuong","TEXT",50)
+
+>>> arcpy.AddField_management("KhuChucNang","loaiKhuChucNang","TEXT",50)
+
+>>> arcpy.CreateDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKhuChucNang"," ","TEXT")
+
+>>> domDict={"BD02":"Don cong an","BD03":"Trai cai tao","BD04":"Trung tam phong chay chua chay","BE02":"Co quan chuyen mon","BE03":"Co quan hanh chinh nha nuoc","BE04":"Co quan dang ","BE05":"To chuc chinh tri-xa hoi","BE06":"Toa an","BE07":"Vien kiem soat","BE09":"Co quan dai dien nuoc ngoai","BG02":"Truong cao dang","BG03":"Truong dai hoc","BG04":"Truong day nghe","BG08":"Truong trung hoc co so","BG09":"Truong trung hoc pho thong","BG10":"Trung tam giao duc thuong xuyen","BG11":"Truong dan toc ngoai tru","BH02":"Khu du lich","BH03":"Bai tam","BI02":"Vien nghien cuu,khoa hoc","BI03":"Trung tam thi nghiem,thuc nghiem","BK02":"Doanh trai quan doi","BK03":"Cua khau","BL02":"Khu che xuat","BL03":"Khu cong nghiep","BL04":"Khu khai khoang","BL05":"Kho tang","BL06":"Lam truong","BL07":"Cong ty","BL08":"Nong truong","BL09":"Trang trai","BL11":"Vuon uom","BL12":"Lo nung","BL13":"Ruong muoi","BM02":"Be boi","BM03":"Nha thi dau","BM04":"San gon","BM05":"San van dong","BN02":"Buu dien","BN03":"Cho","BN04":"Khach san","BN05":"Ngan hang","BN06":"Sieu thi","BN07":"Tram xang,dau","BN08":"Trung tam thuong mai","BP02":"Dinh","BP03":"Den","BO03":"Chua","BO04":"Nha tho","BO05":"Co so dao tao ton giao","BQ04":"Cong vien","BQ08":"Nha hat","BQ09":"Nha van hoa","BQ10":"Rap chieu phim","BQ13":"Thu vien","BQ15":"Vuong hoa","BT02":"Bao tang","BR02":"Tram y te","BR04":"Trung tam dieu duong","BR05":"Trung tam y te","BR03":"Benh vien","BS01":"Di tich lich su-van hoa","BS02":"Khu lang mo","BV02":"Nghia trang liet sy","BV03":"Nghia trang","BV04":"Bai thai cong nghiep","BV05":"Bai rac"}
+>>> for code in domDict:
+...     arcpy.AddCodedValueToDomain_management("E:\decuong\NenDiaLy50N.gdb","LoaiKhuChucNang",code,domDict[code])
+...     arcpy.AssignDomainToField_management("KhuChucNang","loaiKhuChucNang","LoaiKhuChucNang")

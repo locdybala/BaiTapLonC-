@@ -1,0 +1,289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="qlbsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tb_cthoadon">
+    <Key>
+      <PropertyRef Name="maHoaDon" />
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maHoaDon" Type="int" Nullable="false" />
+    <Property Name="maSach" Type="int" Nullable="false" />
+    <Property Name="soLuong" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_ctphieunhap">
+    <Key>
+      <PropertyRef Name="maPhieuNhap" />
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maPhieuNhap" Type="int" Nullable="false" />
+    <Property Name="maSach" Type="int" Nullable="false" />
+    <Property Name="soLuong" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'qlbs.dbo.tb_dangnhap' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="tb_dangnhap">
+          <Property Name="username" Type="nvarchar" MaxLength="50" />
+          <Property Name="password" Type="nvarchar" MaxLength="50" />
+          <Property Name="position" Type="int" />
+        </EntityType>-->
+  <EntityType Name="tb_hoadon">
+    <Key>
+      <PropertyRef Name="maHoaDon" />
+    </Key>
+    <Property Name="maHoaDon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="maKhachHang" Type="int" />
+    <Property Name="ngaylap" Type="date" />
+    <Property Name="manv" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_khachhang">
+    <Key>
+      <PropertyRef Name="maKhachHang" />
+    </Key>
+    <Property Name="maKhachHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenKhachHang" Type="nvarchar" MaxLength="50" />
+    <Property Name="diachiKH" Type="nvarchar" MaxLength="50" />
+    <Property Name="sdtKH" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tb_loaisach">
+    <Key>
+      <PropertyRef Name="maLoaiSach" />
+    </Key>
+    <Property Name="maLoaiSach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenLoaiSach" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_nhacungcap">
+    <Key>
+      <PropertyRef Name="maNhaCungCap" />
+    </Key>
+    <Property Name="maNhaCungCap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenNhaCungCap" Type="nvarchar" MaxLength="50" />
+    <Property Name="diaChi" Type="nvarchar" MaxLength="50" />
+    <Property Name="sdtNhaCungCap" Type="nvarchar" MaxLength="10" />
+    <Property Name="ghichu" Type="nvarchar" MaxLength="255" />
+    <Property Name="chietkhau" Type="float" />
+  </EntityType>
+  <EntityType Name="tb_nhanvien">
+    <Key>
+      <PropertyRef Name="maNhanVien" />
+    </Key>
+    <Property Name="maNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenNhanVien" Type="nvarchar" MaxLength="50" />
+    <Property Name="ngaySinh" Type="date" />
+    <Property Name="sdtNhanVien" Type="nvarchar" MaxLength="10" />
+    <Property Name="gioitinh" Type="nvarchar" MaxLength="3" />
+    <Property Name="diaChi" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tb_phieunhap">
+    <Key>
+      <PropertyRef Name="maPhieuNhap" />
+    </Key>
+    <Property Name="maPhieuNhap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="maNhanVien" Type="int" />
+    <Property Name="maNhaCungCap" Type="int" />
+    <Property Name="ngayNhap" Type="date" />
+  </EntityType>
+  <EntityType Name="tb_sach">
+    <Key>
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maSach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenSach" Type="nvarchar" MaxLength="50" />
+    <Property Name="maLoaiSach" Type="int" />
+    <Property Name="maTacGia" Type="int" />
+    <Property Name="namXuatBan" Type="date" />
+    <Property Name="giaBia" Type="int" />
+  </EntityType>
+  <EntityType Name="tb_tacgia">
+    <Key>
+      <PropertyRef Name="maTacGia" />
+    </Key>
+    <Property Name="maTacGia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tenTacGia" Type="nvarchar" MaxLength="50" />
+    <Property Name="gioiTinh" Type="nvarchar" MaxLength="3" />
+    <Property Name="ngaySinh" Type="date" />
+    <Property Name="trinhdo" Type="nvarchar" MaxLength="50" />
+    <Property Name="coquan" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_tb_cthoadon_tb_hoadon">
+    <End Role="tb_hoadon" Type="Self.tb_hoadon" Multiplicity="1" />
+    <End Role="tb_cthoadon" Type="Self.tb_cthoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_hoadon">
+        <PropertyRef Name="maHoaDon" />
+      </Principal>
+      <Dependent Role="tb_cthoadon">
+        <PropertyRef Name="maHoaDon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_cthoadon_tb_sach">
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="1" />
+    <End Role="tb_cthoadon" Type="Self.tb_cthoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_sach">
+        <PropertyRef Name="maSach" />
+      </Principal>
+      <Dependent Role="tb_cthoadon">
+        <PropertyRef Name="maSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ctphieunhap_tb_phieunhap">
+    <End Role="tb_phieunhap" Type="Self.tb_phieunhap" Multiplicity="1" />
+    <End Role="tb_ctphieunhap" Type="Self.tb_ctphieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_phieunhap">
+        <PropertyRef Name="maPhieuNhap" />
+      </Principal>
+      <Dependent Role="tb_ctphieunhap">
+        <PropertyRef Name="maPhieuNhap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ctphieunhap_tb_sach">
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="1" />
+    <End Role="tb_ctphieunhap" Type="Self.tb_ctphieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_sach">
+        <PropertyRef Name="maSach" />
+      </Principal>
+      <Dependent Role="tb_ctphieunhap">
+        <PropertyRef Name="maSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_hoadon_tb_khachhang">
+    <End Role="tb_khachhang" Type="Self.tb_khachhang" Multiplicity="0..1" />
+    <End Role="tb_hoadon" Type="Self.tb_hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_khachhang">
+        <PropertyRef Name="maKhachHang" />
+      </Principal>
+      <Dependent Role="tb_hoadon">
+        <PropertyRef Name="maKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_hoadon_tb_nhanvien">
+    <End Role="tb_nhanvien" Type="Self.tb_nhanvien" Multiplicity="0..1" />
+    <End Role="tb_hoadon" Type="Self.tb_hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_nhanvien">
+        <PropertyRef Name="maNhanVien" />
+      </Principal>
+      <Dependent Role="tb_hoadon">
+        <PropertyRef Name="manv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_phieunhap_tb_nhacungcap">
+    <End Role="tb_nhacungcap" Type="Self.tb_nhacungcap" Multiplicity="0..1" />
+    <End Role="tb_phieunhap" Type="Self.tb_phieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_nhacungcap">
+        <PropertyRef Name="maNhaCungCap" />
+      </Principal>
+      <Dependent Role="tb_phieunhap">
+        <PropertyRef Name="maNhaCungCap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_phieunhap_tb_nhanvien">
+    <End Role="tb_nhanvien" Type="Self.tb_nhanvien" Multiplicity="0..1" />
+    <End Role="tb_phieunhap" Type="Self.tb_phieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_nhanvien">
+        <PropertyRef Name="maNhanVien" />
+      </Principal>
+      <Dependent Role="tb_phieunhap">
+        <PropertyRef Name="maNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_sach_tb_loaisach">
+    <End Role="tb_loaisach" Type="Self.tb_loaisach" Multiplicity="0..1" />
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_loaisach">
+        <PropertyRef Name="maLoaiSach" />
+      </Principal>
+      <Dependent Role="tb_sach">
+        <PropertyRef Name="maLoaiSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_sach_tb_tacgia">
+    <End Role="tb_tacgia" Type="Self.tb_tacgia" Multiplicity="0..1" />
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tacgia">
+        <PropertyRef Name="maTacGia" />
+      </Principal>
+      <Dependent Role="tb_sach">
+        <PropertyRef Name="maTacGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="qlbsModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_cthoadon" EntityType="Self.tb_cthoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_ctphieunhap" EntityType="Self.tb_ctphieunhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_hoadon" EntityType="Self.tb_hoadon" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_khachhang" EntityType="Self.tb_khachhang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_loaisach" EntityType="Self.tb_loaisach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_nhacungcap" EntityType="Self.tb_nhacungcap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_nhanvien" EntityType="Self.tb_nhanvien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_phieunhap" EntityType="Self.tb_phieunhap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_sach" EntityType="Self.tb_sach" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_tacgia" EntityType="Self.tb_tacgia" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tb_cthoadon_tb_hoadon" Association="Self.FK_tb_cthoadon_tb_hoadon">
+      <End Role="tb_hoadon" EntitySet="tb_hoadon" />
+      <End Role="tb_cthoadon" EntitySet="tb_cthoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_cthoadon_tb_sach" Association="Self.FK_tb_cthoadon_tb_sach">
+      <End Role="tb_sach" EntitySet="tb_sach" />
+      <End Role="tb_cthoadon" EntitySet="tb_cthoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ctphieunhap_tb_phieunhap" Association="Self.FK_tb_ctphieunhap_tb_phieunhap">
+      <End Role="tb_phieunhap" EntitySet="tb_phieunhap" />
+      <End Role="tb_ctphieunhap" EntitySet="tb_ctphieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ctphieunhap_tb_sach" Association="Self.FK_tb_ctphieunhap_tb_sach">
+      <End Role="tb_sach" EntitySet="tb_sach" />
+      <End Role="tb_ctphieunhap" EntitySet="tb_ctphieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_hoadon_tb_khachhang" Association="Self.FK_tb_hoadon_tb_khachhang">
+      <End Role="tb_khachhang" EntitySet="tb_khachhang" />
+      <End Role="tb_hoadon" EntitySet="tb_hoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_hoadon_tb_nhanvien" Association="Self.FK_tb_hoadon_tb_nhanvien">
+      <End Role="tb_nhanvien" EntitySet="tb_nhanvien" />
+      <End Role="tb_hoadon" EntitySet="tb_hoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_phieunhap_tb_nhacungcap" Association="Self.FK_tb_phieunhap_tb_nhacungcap">
+      <End Role="tb_nhacungcap" EntitySet="tb_nhacungcap" />
+      <End Role="tb_phieunhap" EntitySet="tb_phieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_phieunhap_tb_nhanvien" Association="Self.FK_tb_phieunhap_tb_nhanvien">
+      <End Role="tb_nhanvien" EntitySet="tb_nhanvien" />
+      <End Role="tb_phieunhap" EntitySet="tb_phieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_sach_tb_loaisach" Association="Self.FK_tb_sach_tb_loaisach">
+      <End Role="tb_loaisach" EntitySet="tb_loaisach" />
+      <End Role="tb_sach" EntitySet="tb_sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_sach_tb_tacgia" Association="Self.FK_tb_sach_tb_tacgia">
+      <End Role="tb_tacgia" EntitySet="tb_tacgia" />
+      <End Role="tb_sach" EntitySet="tb_sach" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

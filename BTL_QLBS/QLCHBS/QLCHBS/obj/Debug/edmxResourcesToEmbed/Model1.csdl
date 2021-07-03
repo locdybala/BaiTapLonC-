@@ -1,0 +1,302 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="qlbsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tb_cthoadon">
+    <Key>
+      <PropertyRef Name="maHoaDon" />
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maHoaDon" Type="Int32" Nullable="false" />
+    <Property Name="maSach" Type="Int32" Nullable="false" />
+    <Property Name="soLuong" Type="Int32" />
+    <NavigationProperty Name="tb_hoadon" Relationship="Self.FK_tb_cthoadon_tb_hoadon" FromRole="tb_cthoadon" ToRole="tb_hoadon" />
+    <NavigationProperty Name="tb_sach" Relationship="Self.FK_tb_cthoadon_tb_sach" FromRole="tb_cthoadon" ToRole="tb_sach" />
+  </EntityType>
+  <EntityType Name="tb_ctphieunhap">
+    <Key>
+      <PropertyRef Name="maPhieuNhap" />
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maPhieuNhap" Type="Int32" Nullable="false" />
+    <Property Name="maSach" Type="Int32" Nullable="false" />
+    <Property Name="soLuong" Type="Int32" />
+    <NavigationProperty Name="tb_phieunhap" Relationship="Self.FK_tb_ctphieunhap_tb_phieunhap" FromRole="tb_ctphieunhap" ToRole="tb_phieunhap" />
+    <NavigationProperty Name="tb_sach" Relationship="Self.FK_tb_ctphieunhap_tb_sach" FromRole="tb_ctphieunhap" ToRole="tb_sach" />
+  </EntityType>
+  <EntityType Name="tb_hoadon">
+    <Key>
+      <PropertyRef Name="maHoaDon" />
+    </Key>
+    <Property Name="maHoaDon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="maKhachHang" Type="Int32" />
+    <Property Name="ngaylap" Type="DateTime" Precision="0" />
+    <Property Name="manv" Type="Int32" />
+    <NavigationProperty Name="tb_cthoadon" Relationship="Self.FK_tb_cthoadon_tb_hoadon" FromRole="tb_hoadon" ToRole="tb_cthoadon" />
+    <NavigationProperty Name="tb_khachhang" Relationship="Self.FK_tb_hoadon_tb_khachhang" FromRole="tb_hoadon" ToRole="tb_khachhang" />
+    <NavigationProperty Name="tb_nhanvien" Relationship="Self.FK_tb_hoadon_tb_nhanvien" FromRole="tb_hoadon" ToRole="tb_nhanvien" />
+  </EntityType>
+  <EntityType Name="tb_khachhang">
+    <Key>
+      <PropertyRef Name="maKhachHang" />
+    </Key>
+    <Property Name="maKhachHang" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenKhachHang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="diachiKH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sdtKH" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="tb_hoadon" Relationship="Self.FK_tb_hoadon_tb_khachhang" FromRole="tb_khachhang" ToRole="tb_hoadon" />
+  </EntityType>
+  <EntityType Name="tb_loaisach">
+    <Key>
+      <PropertyRef Name="maLoaiSach" />
+    </Key>
+    <Property Name="maLoaiSach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenLoaiSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_sach" Relationship="Self.FK_tb_sach_tb_loaisach" FromRole="tb_loaisach" ToRole="tb_sach" />
+  </EntityType>
+  <EntityType Name="tb_nhacungcap">
+    <Key>
+      <PropertyRef Name="maNhaCungCap" />
+    </Key>
+    <Property Name="maNhaCungCap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenNhaCungCap" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="diaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="sdtNhaCungCap" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="ghichu" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="chietkhau" Type="Double" />
+    <NavigationProperty Name="tb_phieunhap" Relationship="Self.FK_tb_phieunhap_tb_nhacungcap" FromRole="tb_nhacungcap" ToRole="tb_phieunhap" />
+  </EntityType>
+  <EntityType Name="tb_nhanvien">
+    <Key>
+      <PropertyRef Name="maNhanVien" />
+    </Key>
+    <Property Name="maNhanVien" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenNhanVien" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ngaySinh" Type="DateTime" Precision="0" />
+    <Property Name="sdtNhanVien" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="gioitinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="diaChi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_hoadon" Relationship="Self.FK_tb_hoadon_tb_nhanvien" FromRole="tb_nhanvien" ToRole="tb_hoadon" />
+    <NavigationProperty Name="tb_phieunhap" Relationship="Self.FK_tb_phieunhap_tb_nhanvien" FromRole="tb_nhanvien" ToRole="tb_phieunhap" />
+  </EntityType>
+  <EntityType Name="tb_phieunhap">
+    <Key>
+      <PropertyRef Name="maPhieuNhap" />
+    </Key>
+    <Property Name="maPhieuNhap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="maNhanVien" Type="Int32" />
+    <Property Name="maNhaCungCap" Type="Int32" />
+    <Property Name="ngayNhap" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tb_ctphieunhap" Relationship="Self.FK_tb_ctphieunhap_tb_phieunhap" FromRole="tb_phieunhap" ToRole="tb_ctphieunhap" />
+    <NavigationProperty Name="tb_nhacungcap" Relationship="Self.FK_tb_phieunhap_tb_nhacungcap" FromRole="tb_phieunhap" ToRole="tb_nhacungcap" />
+    <NavigationProperty Name="tb_nhanvien" Relationship="Self.FK_tb_phieunhap_tb_nhanvien" FromRole="tb_phieunhap" ToRole="tb_nhanvien" />
+  </EntityType>
+  <EntityType Name="tb_sach">
+    <Key>
+      <PropertyRef Name="maSach" />
+    </Key>
+    <Property Name="maSach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenSach" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="maLoaiSach" Type="Int32" />
+    <Property Name="maTacGia" Type="Int32" />
+    <Property Name="namXuatBan" Type="DateTime" Precision="0" />
+    <Property Name="giaBia" Type="Int32" />
+    <NavigationProperty Name="tb_cthoadon" Relationship="Self.FK_tb_cthoadon_tb_sach" FromRole="tb_sach" ToRole="tb_cthoadon" />
+    <NavigationProperty Name="tb_ctphieunhap" Relationship="Self.FK_tb_ctphieunhap_tb_sach" FromRole="tb_sach" ToRole="tb_ctphieunhap" />
+    <NavigationProperty Name="tb_loaisach" Relationship="Self.FK_tb_sach_tb_loaisach" FromRole="tb_sach" ToRole="tb_loaisach" />
+    <NavigationProperty Name="tb_tacgia" Relationship="Self.FK_tb_sach_tb_tacgia" FromRole="tb_sach" ToRole="tb_tacgia" />
+  </EntityType>
+  <EntityType Name="tb_tacgia">
+    <Key>
+      <PropertyRef Name="maTacGia" />
+    </Key>
+    <Property Name="maTacGia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tenTacGia" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="gioiTinh" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="ngaySinh" Type="DateTime" Precision="0" />
+    <Property Name="trinhdo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="coquan" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tb_sach" Relationship="Self.FK_tb_sach_tb_tacgia" FromRole="tb_tacgia" ToRole="tb_sach" />
+  </EntityType>
+  <Association Name="FK_tb_cthoadon_tb_hoadon">
+    <End Role="tb_hoadon" Type="Self.tb_hoadon" Multiplicity="1" />
+    <End Role="tb_cthoadon" Type="Self.tb_cthoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_hoadon">
+        <PropertyRef Name="maHoaDon" />
+      </Principal>
+      <Dependent Role="tb_cthoadon">
+        <PropertyRef Name="maHoaDon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_cthoadon_tb_sach">
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="1" />
+    <End Role="tb_cthoadon" Type="Self.tb_cthoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_sach">
+        <PropertyRef Name="maSach" />
+      </Principal>
+      <Dependent Role="tb_cthoadon">
+        <PropertyRef Name="maSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ctphieunhap_tb_phieunhap">
+    <End Role="tb_phieunhap" Type="Self.tb_phieunhap" Multiplicity="1" />
+    <End Role="tb_ctphieunhap" Type="Self.tb_ctphieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_phieunhap">
+        <PropertyRef Name="maPhieuNhap" />
+      </Principal>
+      <Dependent Role="tb_ctphieunhap">
+        <PropertyRef Name="maPhieuNhap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_ctphieunhap_tb_sach">
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="1" />
+    <End Role="tb_ctphieunhap" Type="Self.tb_ctphieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_sach">
+        <PropertyRef Name="maSach" />
+      </Principal>
+      <Dependent Role="tb_ctphieunhap">
+        <PropertyRef Name="maSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_hoadon_tb_khachhang">
+    <End Role="tb_khachhang" Type="Self.tb_khachhang" Multiplicity="0..1" />
+    <End Role="tb_hoadon" Type="Self.tb_hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_khachhang">
+        <PropertyRef Name="maKhachHang" />
+      </Principal>
+      <Dependent Role="tb_hoadon">
+        <PropertyRef Name="maKhachHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_hoadon_tb_nhanvien">
+    <End Role="tb_nhanvien" Type="Self.tb_nhanvien" Multiplicity="0..1" />
+    <End Role="tb_hoadon" Type="Self.tb_hoadon" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_nhanvien">
+        <PropertyRef Name="maNhanVien" />
+      </Principal>
+      <Dependent Role="tb_hoadon">
+        <PropertyRef Name="manv" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_sach_tb_loaisach">
+    <End Role="tb_loaisach" Type="Self.tb_loaisach" Multiplicity="0..1" />
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_loaisach">
+        <PropertyRef Name="maLoaiSach" />
+      </Principal>
+      <Dependent Role="tb_sach">
+        <PropertyRef Name="maLoaiSach" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_phieunhap_tb_nhacungcap">
+    <End Role="tb_nhacungcap" Type="Self.tb_nhacungcap" Multiplicity="0..1" />
+    <End Role="tb_phieunhap" Type="Self.tb_phieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_nhacungcap">
+        <PropertyRef Name="maNhaCungCap" />
+      </Principal>
+      <Dependent Role="tb_phieunhap">
+        <PropertyRef Name="maNhaCungCap" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_phieunhap_tb_nhanvien">
+    <End Role="tb_nhanvien" Type="Self.tb_nhanvien" Multiplicity="0..1" />
+    <End Role="tb_phieunhap" Type="Self.tb_phieunhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_nhanvien">
+        <PropertyRef Name="maNhanVien" />
+      </Principal>
+      <Dependent Role="tb_phieunhap">
+        <PropertyRef Name="maNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tb_sach_tb_tacgia">
+    <End Role="tb_tacgia" Type="Self.tb_tacgia" Multiplicity="0..1" />
+    <End Role="tb_sach" Type="Self.tb_sach" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tacgia">
+        <PropertyRef Name="maTacGia" />
+      </Principal>
+      <Dependent Role="tb_sach">
+        <PropertyRef Name="maTacGia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="qlbsEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="tb_cthoadon" EntityType="Self.tb_cthoadon" />
+    <EntitySet Name="tb_ctphieunhap" EntityType="Self.tb_ctphieunhap" />
+    <EntitySet Name="tb_hoadon" EntityType="Self.tb_hoadon" />
+    <EntitySet Name="tb_khachhang" EntityType="Self.tb_khachhang" />
+    <EntitySet Name="tb_loaisach" EntityType="Self.tb_loaisach" />
+    <EntitySet Name="tb_nhacungcap" EntityType="Self.tb_nhacungcap" />
+    <EntitySet Name="tb_nhanvien" EntityType="Self.tb_nhanvien" />
+    <EntitySet Name="tb_phieunhap" EntityType="Self.tb_phieunhap" />
+    <EntitySet Name="tb_sach" EntityType="Self.tb_sach" />
+    <EntitySet Name="tb_tacgia" EntityType="Self.tb_tacgia" />
+    <AssociationSet Name="FK_tb_cthoadon_tb_hoadon" Association="Self.FK_tb_cthoadon_tb_hoadon">
+      <End Role="tb_hoadon" EntitySet="tb_hoadon" />
+      <End Role="tb_cthoadon" EntitySet="tb_cthoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_cthoadon_tb_sach" Association="Self.FK_tb_cthoadon_tb_sach">
+      <End Role="tb_sach" EntitySet="tb_sach" />
+      <End Role="tb_cthoadon" EntitySet="tb_cthoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ctphieunhap_tb_phieunhap" Association="Self.FK_tb_ctphieunhap_tb_phieunhap">
+      <End Role="tb_phieunhap" EntitySet="tb_phieunhap" />
+      <End Role="tb_ctphieunhap" EntitySet="tb_ctphieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_ctphieunhap_tb_sach" Association="Self.FK_tb_ctphieunhap_tb_sach">
+      <End Role="tb_sach" EntitySet="tb_sach" />
+      <End Role="tb_ctphieunhap" EntitySet="tb_ctphieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_hoadon_tb_khachhang" Association="Self.FK_tb_hoadon_tb_khachhang">
+      <End Role="tb_khachhang" EntitySet="tb_khachhang" />
+      <End Role="tb_hoadon" EntitySet="tb_hoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_hoadon_tb_nhanvien" Association="Self.FK_tb_hoadon_tb_nhanvien">
+      <End Role="tb_nhanvien" EntitySet="tb_nhanvien" />
+      <End Role="tb_hoadon" EntitySet="tb_hoadon" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_sach_tb_loaisach" Association="Self.FK_tb_sach_tb_loaisach">
+      <End Role="tb_loaisach" EntitySet="tb_loaisach" />
+      <End Role="tb_sach" EntitySet="tb_sach" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_phieunhap_tb_nhacungcap" Association="Self.FK_tb_phieunhap_tb_nhacungcap">
+      <End Role="tb_nhacungcap" EntitySet="tb_nhacungcap" />
+      <End Role="tb_phieunhap" EntitySet="tb_phieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_phieunhap_tb_nhanvien" Association="Self.FK_tb_phieunhap_tb_nhanvien">
+      <End Role="tb_nhanvien" EntitySet="tb_nhanvien" />
+      <End Role="tb_phieunhap" EntitySet="tb_phieunhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tb_sach_tb_tacgia" Association="Self.FK_tb_sach_tb_tacgia">
+      <End Role="tb_tacgia" EntitySet="tb_tacgia" />
+      <End Role="tb_sach" EntitySet="tb_sach" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
